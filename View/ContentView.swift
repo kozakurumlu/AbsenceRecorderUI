@@ -8,17 +8,18 @@
 import SwiftUI
 
 struct ContentView: View {
+    var divisions: [Division]
+    
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+        Form {
+            Text(Division.examples[0].code)
         }
         .padding()
     }
 }
 
-#Preview {
-    ContentView()
+struct ContentView_Previews: PreviewProvider {
+    static var previews: some View{
+        ContentView(divisions: Division.examples)
+    }
 }
