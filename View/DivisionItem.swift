@@ -8,11 +8,15 @@
 import SwiftUI
 
 struct DivisionItem: View {
+    let division: Division
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        HStack{
+            Image(systemName: "\(division.students.count).circle")
+            Text("\(division.code)")
+        }
     }
 }
 
 #Preview {
-    DivisionItem()
+    DivisionItem(division: Division(code: "vBY-1"))
 }

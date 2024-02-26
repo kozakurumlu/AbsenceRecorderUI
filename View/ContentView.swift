@@ -8,22 +8,40 @@
 import SwiftUI
 
 struct ContentView: View {
-    var divisions: [Division] = Division.examples
-    var currentDate: Date = Date()
+    var divisions: [Division]
+    @EnvironmentObject var state: StateController
+    @State private var currentDate: Date = Date()
+    
+    
     var body: some View {
         NavigationView{
-            List(divisions, id: \.self.code){ division in
-                Text(division.code)
-                    .padding()
+            List(state.divisions, id: \.self.code){ division in
+                NavigationLink(destination: AbsenceView(division: division)){
+                    DivisionItem(division: division)
+                }
             }
             .navigationTitle(currentDate.getShortDateFormat())
+            .toolbar {
+                ToolbarItem(placement: .navigationBarLeading) {
+                    Button(action: { currentDate = currentDate.previousDay() }) {
+                        Image(systemName: "arrow.backward")
+                    }
+                }
+                
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button(action: { currentDate = currentDate.nextDay() }) {
+                        Image(systemName: "arrow.forward")
+                    }
+                }
+            }
         }
         
     }
         
-    struct ContentView_Previews: PreviewProvider {
-        static var previews: some View{
-            ContentView(divisions: Division.examples)
-        }
-    }
+    
+}
+
+#Preview {
+    ContentView(divisions: Division.examples)
+        .environmentObject(StateController())
 }
