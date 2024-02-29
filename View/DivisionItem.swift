@@ -5,7 +5,7 @@
 //  Created by Kurumlu, Koza (RCH) on 05/02/2024.
 //
 
-import SwiftUI
+import SwiftUI  
 
 struct DivisionItem: View {
     let division: Division

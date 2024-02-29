@@ -16,10 +16,11 @@ struct ContentView: View {
     var body: some View {
         NavigationView{
             List(state.divisions, id: \.self.code){ division in
-                NavigationLink(destination: AbsenceView(division: division)){
+                NavigationLink(destination: AbsenceView(absence: division.createAbsenceOrGetExistingifAvailable(for: currentDate))){
                     DivisionItem(division: division)
                 }
             }
+            .onAppear(perform: {state.saveToFile()})
             .navigationTitle(currentDate.getShortDateFormat())
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {

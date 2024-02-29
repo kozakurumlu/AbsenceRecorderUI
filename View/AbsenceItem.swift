@@ -8,11 +8,24 @@
 import SwiftUI
 
 struct AbsenceItem: View {
+    @ObservedObject var studentAbsence: StudentAbsence
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        HStack{
+            Text("\(studentAbsence.student.forename)")
+            Spacer()
+            if !studentAbsence.isAbsent{
+                Button("✅", action: {toggleAbsent()})
+            } else{
+                Button("❌", action: {toggleAbsent()})
+            }
+        }
+    }
+    func toggleAbsent(){
+        studentAbsence.isAbsent.toggle()
     }
 }
 
 #Preview {
-    AbsenceItem()
+    AbsenceItem(studentAbsence: StudentAbsence.example)
 }
